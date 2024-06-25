@@ -1,0 +1,190 @@
+<!-- Este es tu archivo home.component.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .header-logo {
+      height: 4rem; /* Incrementado el tamaño del logo */
+    }
+    .search-bar {
+      width: 50%;
+      max-width: 600px;
+      border-radius: 9999px;
+      border: 1px solid #D1D5DB; /* Border color gray-300 */
+    }
+  </style>
+  <title>Manos Amigas</title>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Encabezado -->
+  <nav class="flex items-center justify-between p-4 bg-white shadow border-b border-gray-300">
+    <div class="flex items-center space-x-4">
+      <!-- Logo de ManosAmigas -->
+      <img src="assets/MLogo.jpg" alt="ManosAmigas Logo" class="header-logo">
+    </div>
+    
+    <div class="flex justify-center flex-1">
+      <!-- Barra de búsqueda -->
+      <input type="text" placeholder="Buscar actividad..." class="p-2 search-bar">
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <!-- Iconos de mensajes y perfil -->
+      <button class="p-2">
+        <img src="assets/mail.png" alt="Messages" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
+      </button>
+      <button class="p-2">
+        <img src="assets/login.png" alt="Profile" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
+      </button>
+    </div>
+  </nav>
+
+  <!-- Contenido dinámico de la página -->
+  <router-outlet></router-outlet>
+
+  <!-- Sección principal -->
+  <section class="relative bg-cover bg-center py-24" style="background-image: url('https://blog.oxfamintermon.org/wp-content/uploads/2015/03/voluntariado.jpg');">
+    <div class="absolute inset-0 bg-red-600 opacity-70"></div>
+    <div class="relative container mx-auto text-center text-white">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Viaja, ayuda, y colabora</h1>
+      <p class="text-lg md:text-xl mb-6">Viaja por todo el país de manera segura como un voluntariado ayudando a las comunidades que más lo necesitan y haciendo un impacto en el país.</p>
+      <a href="#" class="inline-block bg-white text-red-600 py-3 px-6 rounded-full font-semibold">Únete ya</a>
+    </div>
+  </section>
+
+  <!-- Sección de acción -->
+  <section class="bg-white py-12">
+    <div class="container mx-auto flex flex-col md:flex-row items-center px-4">
+      <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+        <h2 class="text-4xl font-bold mb-4">Ayuda al país a mejorar con <span class="text-red-500">tus acciones</span></h2>
+        <p class="text-lg text-gray-700 mb-6">Cada pequeño acto de voluntariado contribuye a crear un entorno más fuerte, solidario y sostenible. Te invitamos a formar parte de nuestras actividades de voluntariado y a ser un agente de cambio positivo.</p>
+        <a href="#" class="inline-block bg-red-500 hover:bg-red-600 text-white py-3 px-8 rounded-lg text-lg">Ver actividades</a>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <img src="assets/vivero.jpg" alt="Volunteers" class="rounded-lg shadow-lg max-w-full">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de áreas de voluntariado -->
+  <section class="bg-gray-100 py-12">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8">Múltiples áreas de voluntariado</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/domestico.jpeg" alt="Doméstico" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Doméstico</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/agricultura.jpeg" alt="Agricultura" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Agricultura</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/educativo.jpeg" alt="Educativo" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Educativo</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/medioambiental.jpeg" alt="Medioambiental" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Medioambiental</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/bienestar-animal.jpeg" alt="Bienestar Animal" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Bienestar Animal</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/salud.jpeg" alt="Salud" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Salud</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/comunidad.jpeg" alt="Comunidad" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Comunidad</h3>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <img src="assets/culinaria.jpeg" alt="Culinaria" class="h-32 w-full object-cover rounded-t-lg">
+          <h3 class="text-xl font-semibold mt-4">Culinaria</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de beneficios -->
+  <section class="bg-white py-12">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">¿Qué ofrece Manos Amigas?</h2>
+      <div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-6">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="assets/logo-seguridad.png" alt="Seguridad Total" class="h-16 w-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">Seguridad Total</h3>
+          <p class="text-gray-700 mt-4">No aseguramos que los hosts y las actividades sean seguras para que puedas voluntariar sin preocupación.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="assets/logo-comunidad.png" alt="Comunidad Transparente" class="h-16 w-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">Comunidad Transparente</h3>
+          <p class="text-gray-700 mt-4">Conéctate con personas que comparten tus valores y objetivos, en un entorno transparente y cooperativo.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+          <img src="assets/logo-cliente.png" alt="Atención al Usuario" class="h-16 w-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">Atención al Usuario</h3>
+          <p class="text-gray-700 mt-4">Estamos aquí para ayudarte con cualquier consulta o necesidad que tengas durante tu experiencia de voluntariado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de organización de actividades -->
+  <section class="bg-red-600 py-12">
+    <div class="container mx-auto text-center text-white">
+      <h2 class="text-3xl font-bold mb-4">¿Quieres organizar una actividad?</h2>
+      <p class="text-lg mb-6">Como host, podrás crear y planificar una actividad de voluntariado en nuestra plataforma con el fin de ayudar en tu comunidad.</p>
+      <a href="#" class="inline-block bg-white text-red-600 py-3 px-8 rounded-lg text-lg">Conviértete en un Host</a>
+    </div>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="bg-white py-6">
+
+    <div class="container mx-auto flex flex-wrap justify-around">
+      <div class="w-full md:w-1/3 lg:w-1/4 mb-6">
+        <h3 class="text-xl font-semibold mb-2">Tentang</h3>
+        <ul>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Misión</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Visión</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Valores</a></li>
+        </ul>
+      </div>
+      <div class="w-full md:w-1/3 lg:w-1/4 mb-6">
+        <h3 class="text-xl font-semibold mb-2">Support</h3>
+        <ul>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Contacto</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Ayuda</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Reportar un problema</a></li>
+        </ul>
+      </div>
+      <div class="w-full md:w-1/3 lg:w-1/4 mb-6">
+        <h3 class="text-xl font-semibold mb-2">FAQ</h3>
+        <ul>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Preguntas Frecuentes</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Guía de usuario</a></li>
+          <li><a href="#" class="text-gray-700 hover:text-red-600">Políticas</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container mx-auto text-center">
+      <img src="assets/MLogo.jpg" alt="Manos Amigas Logo" class="h-16 mx-auto mb-4">
+      <p class="text-gray-700 mb-4">&copy; 2024 Manos Amigas. Todos los derechos reservados.</p>
+      <div class="flex justify-center space-x-6">
+        <a href="#" class="text-gray-700 hover:text-gray-900">Términos y Condiciones</a>
+        <a href="#" class="text-gray-700 hover:text-gray-900">Política de Privacidad</a>
+        <a href="#" class="text-gray-700 hover:text-gray-900">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+

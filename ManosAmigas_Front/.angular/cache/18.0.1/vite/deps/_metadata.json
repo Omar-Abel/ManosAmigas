@@ -1,40 +1,55 @@
 {
-  "hash": "8b53eefa",
-  "configHash": "71dfb612",
-  "lockfileHash": "62c57982",
-  "browserHash": "56096dc4",
+  "hash": "3d7df5fe",
+  "configHash": "7f2ee529",
+  "lockfileHash": "a7246777",
+  "browserHash": "0908f3f9",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "bbe13689",
+      "fileHash": "68786e7d",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "79d99e88",
+      "fileHash": "e208e64f",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "29a2a830",
+      "fileHash": "37f4ea94",
       "needsInterop": false
     },
     "flowbite": {
       "src": "../../../../../node_modules/flowbite/lib/esm/index.js",
       "file": "flowbite.js",
-      "fileHash": "d8f9a89b",
+      "fileHash": "389a75f8",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "1b13fb74",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "f8f8c80a",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-Y5G5723O": {
-      "file": "chunk-Y5G5723O.js"
+    "chunk-4X3PDZAT": {
+      "file": "chunk-4X3PDZAT.js"
     },
-    "chunk-T3KZEASW": {
-      "file": "chunk-T3KZEASW.js"
+    "chunk-SKEP7TBY": {
+      "file": "chunk-SKEP7TBY.js"
+    },
+    "chunk-DGWJPOJA": {
+      "file": "chunk-DGWJPOJA.js"
     },
     "chunk-J4B6MK7R": {
       "file": "chunk-J4B6MK7R.js"
