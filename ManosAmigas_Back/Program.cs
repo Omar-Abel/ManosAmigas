@@ -1,8 +1,6 @@
-using ManosAmigas_Back.Data;
+using ManosAmigas_Back.Models.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace ManosAmigas_Back
@@ -55,9 +53,6 @@ namespace ManosAmigas_Back
                     };
                 });
 
-            services.AddPersistenceInfrastructure(confi);
-
-            services.AddApplicationLayer(confi);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
