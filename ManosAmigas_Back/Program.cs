@@ -1,4 +1,5 @@
 using ManosAmigas_Back.Models.Common;
+using ManosAmigas_Back.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -53,6 +54,8 @@ namespace ManosAmigas_Back
                     };
                 });
 
+            builder.Services.AddScoped<IUserService, UserService>();
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -60,6 +63,8 @@ namespace ManosAmigas_Back
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
