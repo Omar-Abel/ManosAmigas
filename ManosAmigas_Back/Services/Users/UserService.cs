@@ -32,7 +32,10 @@ namespace ManosAmigas_Back.Services.Users
                 var user = await db.Users.FirstOrDefaultAsync(x => x.Email == model.email
                 && x.Password == spassword);
 
-                if (user == null) return null;
+                if (user == null)
+                {
+                    return null;
+                }
 
                 uReponse.id = user.Id;
                 uReponse.email = user.Email;
@@ -69,13 +72,15 @@ namespace ManosAmigas_Back.Services.Users
 
             using (var db = new ManosAmigasDbContext())
             {
-                if (await db.Users.AnyAsync(x => x.Email == model.email && x.Email == model.email))
+                if (await db.Users.AnyAsync(x => x.Email == model.email))
                 {
                     uResponse.email = model.email;
                     return null;
                 }
                 
                 uResponse.email = model.email;
+                uResponse.firstName = model.firstName;
+                uResponse.lastName = model.lastName;
 
                 var user = new User
                 {

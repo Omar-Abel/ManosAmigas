@@ -7,5 +7,7 @@ namespace ManosAmigas_Back.Services.Users
     {
         Task<UserResponse> AuthUser(UserAuthRequest model);
 
+        Task<UserRegisterResponse> RegisterUser(UserRegisterRequest model);
+
     }
 }

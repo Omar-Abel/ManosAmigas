@@ -23,7 +23,7 @@ public partial class User
     [Unicode(false)]
     public string Email { get; set; } = null!;
 
-    [StringLength(256)]
+    [StringLength(350)]
     [Unicode(false)]
     public string Password { get; set; } = null!;
 }

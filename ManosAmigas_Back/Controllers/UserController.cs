@@ -24,11 +24,11 @@ namespace ManosAmigas_Back.Controllers
             Response response = new();
             var uResponse = await _userService.AuthUser(model);
 
-            if (uResponse != null)
+            if (uResponse == null)
             {
                 response.success = 0;
                 response.message = "Usuario o contraseña incorrecta";
-                return Ok(response);
+                return BadRequest(response);
             }
 
             response.success = 1;
@@ -37,6 +37,27 @@ namespace ManosAmigas_Back.Controllers
 
             return Ok(response);
 
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequest model)
+        {
+            Response response = new Response();
+
+            var uResponse = await _userService.RegisterUser(model);
+
+            if (uResponse == null)
+            {
+                response.success = 0;
+                response.message = "Registro invalido o ya existente";
+                return BadRequest(response);
+            }
+
+            response.success = 1;
+            response.message = "Se ha registrado el usuario";
+            response.Data = uResponse;
+
+            return Ok(response);
         }
     }
 }

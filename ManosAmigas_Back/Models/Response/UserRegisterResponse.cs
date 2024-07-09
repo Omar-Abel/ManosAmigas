@@ -7,6 +7,5 @@ namespace ManosAmigas_Back.Models.Response
         [Required] public string firstName { get; set; } = null!;
         [Required] public string lastName { get; set; } = null!;
         [Required] public string email { get; set; } = null!;
-        [Required] public string password { get; set; } = null!;
     }
 }
