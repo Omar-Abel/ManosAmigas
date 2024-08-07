@@ -81,13 +81,15 @@ namespace ManosAmigas_Back.Services.Users
                 uResponse.email = model.email;
                 uResponse.firstName = model.firstName;
                 uResponse.lastName = model.lastName;
+                uResponse.accountType = model.accountType;
 
                 var user = new User
                 {
                     FirstName = model.firstName,
                     LastName = model.lastName,
                     Email = model.email,
-                    Password = Encrypt.GetSHA256(model.password)
+                    Password = Encrypt.GetSHA256(model.password),
+                    AccountType = model.accountType
                 };
 
 

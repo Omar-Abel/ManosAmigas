@@ -8,5 +8,6 @@ namespace ManosAmigas_Back.Models.Request
         [Required] public string lastName { get; set; } = null!;
         [Required] public string email { get; set; } = null!;
         [Required] public string password { get; set; } = null!;
+        [Required] public int accountType { get; set; }
     }
 }
