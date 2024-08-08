@@ -4,7 +4,7 @@ namespace ManosAmigas_Back.Models.Request
 {
     public class ActivityRequest
     {
-        public int id { get; set; }
+  
         [Required] public string title { get; set; } = null!;
         [Required] public string description { get; set; } = null!;
         [Required] public string category { get; set; } = null!;
