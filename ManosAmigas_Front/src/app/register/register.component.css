@@ -1,0 +1,19 @@
+/* Estilo para el botón cuando el formulario es válido */
+.bg-red-600 {
+    background-color: #dc2626; /* Rojo */
+}
+
+/* Estilo para el botón cuando el formulario no es válido */
+.bg-gray-500 {
+    background-color: #6b7280; /* Gris */
+}
+
+/* Efecto hover para el botón cuando el formulario es válido */
+.bg-red-600.hover\:bg-red-500:hover {
+    background-color: #b91c1c; /* Rojo más oscuro */
+}
+
+/* Cursor para el botón desactivado */
+.cursor-not-allowed {
+    cursor: not-allowed;
+}

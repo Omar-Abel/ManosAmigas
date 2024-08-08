@@ -1,6 +1,9 @@
-
-using ManosAmigas_Back.Sources.Application;
-using ManosAmigas_Back.Sources.Persistence;
+using ManosAmigas_Back.Models.Common;
+using ManosAmigas_Back.Services.Activities;
+using ManosAmigas_Back.Services.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ManosAmigas_Back
 {
@@ -14,10 +17,48 @@ namespace ManosAmigas_Back
             var services = builder.Services;
 
             var confi = builder.Configuration;
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-            services.AddPersistenceInfrastructure(confi);
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("*")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowedToAllowWildcardSubdomains();
+                    });
+            });
 
-            services.AddApplicationLayer(confi);
+            var appSettingsSection = builder.Configuration.GetSection("AppSettings");
+            builder.Services.Configure<AppSettings>(appSettingsSection);
+
+            //JWT
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.secret);
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IActivityService, ActivityService>();
+
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,6 +66,8 @@ namespace ManosAmigas_Back
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -34,8 +77,10 @@ namespace ManosAmigas_Back
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
 
             app.MapControllers();

@@ -1,8 +1,9 @@
-﻿using ManosAmigas_Back.Sources.Application.Interfaces.Services;
-using ManosAmigas_Back.Sources.Application.ViewModels.Users;
-using ManosAmigas_Back.Sources.Domain.Entities;
+﻿using ManosAmigas_Back.Models.Request;
+using ManosAmigas_Back.Models.Response;
+using ManosAmigas_Back.Services.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace ManosAmigas_Back.Controllers
 {
@@ -10,60 +11,53 @@ namespace ManosAmigas_Back.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetAll()
+        [HttpPost("login")]
+        public async Task<IActionResult> AunthenticateUser([FromBody] UserAuthRequest model)
         {
-            var users = await _userService.GetAllViewModel();
-            return Ok(users);
-        }
+            Response response = new();
+            var uResponse = await _userService.AuthUser(model);
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserViewModel>> GetById(int id)
-        {
-            var user = await _userService.GetByIdSaveViewModel(id);
-            if (user == null)
+            if (uResponse == null)
             {
-                return NotFound();
-            }
-            return Ok(user);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Add(SaveUserViewModel user)
-        {
-            await _userService.Add(user);
-            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, SaveUserViewModel user)
-        {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-            await _userService.Update(user);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var existingUser = await _userService.GetByIdSaveViewModel(id);
-            if (existingUser == null)
-            {
-                return NotFound();
+                response.success = 0;
+                response.message = "Usuario o contraseña incorrecta";
+                return BadRequest(response);
             }
 
-            await _userService.Delete(id);
-            return NoContent();
+            response.success = 1;
+            response.message = "Usuario logueado correctamente";
+            response.Data = uResponse;
+
+            return Ok(response);
+
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequest model)
+        {
+            Response response = new Response();
+
+            var uResponse = await _userService.RegisterUser(model);
+
+            if (uResponse == null)
+            {
+                response.success = 0;
+                response.message = "Registro invalido o ya existente";
+                return BadRequest(response);
+            }
+
+            response.success = 1;
+            response.message = "Se ha registrado el usuario";
+            response.Data = uResponse;
+
+            return Ok(response);
         }
     }
 }
