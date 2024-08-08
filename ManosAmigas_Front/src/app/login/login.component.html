@@ -1,4 +1,3 @@
-<!-- component -->
 <div class="min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover relative items-center"
      style="background-image: url('https://blog.oxfamintermon.org/wp-content/uploads/2015/03/voluntariado.jpg');">
     <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
@@ -7,31 +6,37 @@
             <img src="/assets/MLogo.jpg" alt="Logo" class="mx-auto w-24 h-24">
         </div>
 
-        <form class="max-w-md mx-auto">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="max-w-md mx-auto">
             <div class="relative z-0 w-full mb-5 group">
-                <input type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-500 peer" placeholder=" " required />
-                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-500 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+                <input type="email" formControlName="email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-500 peer" placeholder=" " required />
+                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-500 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Correo electronico</label>
+                <div *ngIf="emailControl?.invalid && emailControl?.touched" class="text-red-600 text-sm">
+                    <div *ngIf="emailControl?.errors?.['required']">Correo Electronico es requerido</div>
+                    <div *ngIf="emailControl?.errors?.['email']">Correo Electronico no valido</div>
+                </div>
             </div>
             <div class="relative z-0 w-full mb-8 group">
-                <input type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-500 peer" placeholder=" " required />
-                <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-500 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                <input type="password" formControlName="password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-500 peer" placeholder=" " required />
+                <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-500 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contraseña</label>
+                <div *ngIf="passwordControl?.invalid && passwordControl?.touched" class="text-red-600 text-sm">
+                    <div *ngIf="passwordControl?.errors?.['required']">La contraseña es requerida</div>
+                </div>
             </div>
             <div class="flex items-center justify-between">
                 <div></div>
                 <div class="text-sm">
                     <a href="#" class="font-medium text-indigo-500 hover:text-indigo-700">
-                        Forgot your password?
+                        Olvidaste tu contraseña?
                     </a>
                 </div>
             </div>
-            <button type="submit" class="w-full flex justify-center bg-red-600 text-gray-100 p-4 mt-10 rounded-full tracking-wide
-                font-semibold focus:outline-none focus:shadow-outline hover:bg-red-500 shadow-lg cursor-pointer transition ease-in duration-300">
-                Login
+            <button type="submit" [ngClass]="{'bg-red-500': loginForm.valid, 'bg-gray-500': !loginForm.valid}" class="w-full flex justify-center text-gray-100 p-4 mt-10 rounded-full tracking-wide font-semibold focus:outline-none focus:shadow-outline hover:bg-red-500 shadow-lg cursor-pointer transition ease-in duration-300">
+                Iniciar Sesion
             </button>
         </form>
         <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
             <span>Don't have an account?</span>
-            <a href="#" class="text-indigo-500 hover:text-indigo-700 no-underline hover:underline cursor-pointer transition ease-in duration-300">Register</a>
+            <a [routerLink]="'/register'" class="text-indigo-500 hover:text-indigo-700 no-underline hover:underline cursor-pointer transition ease-in duration-300">Register</a>
         </p>
-    </div>
+    </div>
 </div>
