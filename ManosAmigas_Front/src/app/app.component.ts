@@ -4,12 +4,12 @@ import { initFlowbite } from 'flowbite';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
-import { NgIf } from '@angular/common';
+import { NgIf, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, NgIf], 
+  imports: [RouterOutlet, FormsModule, NgIf, CommonModule],  
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
