@@ -1,4 +1,5 @@
 using ManosAmigas_Back.Models.Common;
+using ManosAmigas_Back.Services.Activities;
 using ManosAmigas_Back.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -55,6 +56,8 @@ namespace ManosAmigas_Back
                 });
 
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IActivityService, ActivityService>();
+
 
 
             builder.Services.AddControllers();
@@ -74,8 +77,9 @@ namespace ManosAmigas_Back
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseCors(MyAllowSpecificOrigins);
 
 

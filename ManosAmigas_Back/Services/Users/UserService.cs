@@ -79,9 +79,6 @@ namespace ManosAmigas_Back.Services.Users
                 }
                 
                 uResponse.email = model.email;
-                uResponse.firstName = model.firstName;
-                uResponse.lastName = model.lastName;
-                uResponse.accountType = model.accountType;
 
                 var user = new User
                 {

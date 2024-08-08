@@ -19,21 +19,18 @@ namespace ManosAmigas_Back.Data
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Activity> Activities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Cargar la configuración desde el archivo appsettings.json
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                // Obtener el connection string
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-                // Configurar el contexto para usar SQL Server con el connection string
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }

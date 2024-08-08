@@ -8,6 +8,10 @@ namespace ManosAmigas_Back.Models
 {
     public partial class User
     {
+        public User() {
+            Activities = new HashSet<Activity>();
+        }
+
         [Key]
         public long Id { get; set; }
 
@@ -27,6 +31,9 @@ namespace ManosAmigas_Back.Models
         [Unicode(false)]
         public string Password { get; set; } = null!;
 
-        public int AccountType { get; set; } // Nueva columna
+        public int AccountType { get; set; }
+
+        [InverseProperty("Host")]
+        public ICollection<Activity> Activities { get; set; } = new List<Activity>();
     }
 }

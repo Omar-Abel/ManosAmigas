@@ -4,6 +4,7 @@ using ManosAmigas_Back.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManosAmigas_Back.Migrations
 {
     [DbContext(typeof(ManosAmigasDbContext))]
-    partial class ManosAmigasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240808020955_AddActivityTable")]
+    partial class AddActivityTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +51,6 @@ namespace ManosAmigas_Back.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("HostId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -76,8 +76,6 @@ namespace ManosAmigas_Back.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("HostId");
 
                     b.ToTable("Activities");
                 });
@@ -120,22 +118,6 @@ namespace ManosAmigas_Back.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ManosAmigas_Back.Models.Activity", b =>
-                {
-                    b.HasOne("ManosAmigas_Back.Models.User", "Host")
-                        .WithMany("Activities")
-                        .HasForeignKey("HostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Host");
-                });
-
-            modelBuilder.Entity("ManosAmigas_Back.Models.User", b =>
-                {
-                    b.Navigation("Activities");
                 });
 #pragma warning restore 612, 618
         }

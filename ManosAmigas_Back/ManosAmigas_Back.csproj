@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Services\Activities\" />
+    <Folder Include="imgs\" />
   </ItemGroup>
 
 </Project>
