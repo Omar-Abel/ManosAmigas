@@ -63,7 +63,7 @@ namespace ManosAmigas_Back.Controllers
         }
 
         [HttpPost("addActivity")]
-        public async Task<IActionResult> PostActivity([FromBody] ActivityRequest model)
+        public async Task<IActionResult> PostActivity([FromForm] ActivityRequest model)
         {
             Response response = new();
 

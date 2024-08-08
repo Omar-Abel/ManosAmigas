@@ -38,7 +38,10 @@ namespace ManosAmigas_Back.Services.Users
                 }
 
                 uReponse.id = user.Id;
+                uReponse.firstName = user.FirstName;
+                uReponse.lastName = user.LastName;
                 uReponse.email = user.Email;
+                uReponse.accountType = user.AccountType;
                 uReponse.token = GenerateToken(user);
             }
 

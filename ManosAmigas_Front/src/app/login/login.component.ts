@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string | null = null;
+  showToast: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -45,9 +46,11 @@ export class LoginComponent implements OnInit {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (response) => {
-          if (response && response.Data.token) {
-            localStorage.setItem('currentUser', JSON.stringify({ email, token: response.Data.token }));
-            this.router.navigate(['/']);
+          if (response && response.data.token) {
+            this.showToast = true;
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 4000);
           } else {
             this.errorMessage = 'Login failed';
           }
@@ -59,4 +62,8 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-}
+  
+  
+  
+  }
+  

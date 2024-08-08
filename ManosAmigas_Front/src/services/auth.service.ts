@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JsonOptions } from './httpOptions'; 
-import { UserAuth } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +17,22 @@ export class AuthService {
     return this.http.post<any>(this.apiUrl, { email, password }, JsonOptions).pipe(
       map(response => {
         if (response && response.data && response.data.token) {
-          localStorage.setItem('currentUser', JSON.stringify({ email, token: response.data.token }));
-          this.router.navigate(['/']); // Redirige al HomeComponent
+          localStorage.setItem('currentUser', JSON.stringify({
+            id: response.data.id,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            email,
+            accountType: response.data.accountType,
+            token: response.data.token
+          }));
+          return response;
+        } else {
+          throw new Error('Login failed');
         }
-        return response;
       })
     );
   }
+  
 
   logout(): void {
     localStorage.removeItem('currentUser');
