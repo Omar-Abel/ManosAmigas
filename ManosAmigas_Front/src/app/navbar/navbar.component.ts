@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -8,12 +9,27 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  accountType!: number; // Asegurando a TypeScript que se inicializará antes de su uso
+  firstName!: string;
+  lastName!: string;
+  accountType!: number;
+  
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.loadAccountType();
+  }
+
+  createActivity(){
+    this.router.navigate(['/createActivities']);
+  }
+   Logout(){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
+
+  toHome(){
+    this.router.navigate(['/'])
   }
 
   private loadAccountType(): void {
@@ -27,6 +43,9 @@ export class NavbarComponent implements OnInit {
 
         // Extraer el accountType
         this.accountType = currentUser.accountType;
+        this.firstName = currentUser.firstName;
+        this.lastName = currentUser.lastName;
+
       } catch (error) {
         // Manejar errores en el parsing de JSON
         console.error('Error al parsear currentUser desde localStorage:', error);
