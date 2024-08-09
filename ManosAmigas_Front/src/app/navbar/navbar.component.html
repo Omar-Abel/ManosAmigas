@@ -10,7 +10,7 @@
     }
   </style>
   
-<nav class="flex items-center justify-between p-4 bg-white shadow border-b border-gray-300">
+  <nav class="flex items-center justify-between p-4 bg-white shadow border-b border-gray-300">
     <div class="flex items-center space-x-4">
       <!-- Logo de ManosAmigas -->
       <img src="assets/MLogo.jpg" alt="ManosAmigas Logo" class="header-logo">
@@ -18,17 +18,27 @@
     
     <div class="flex justify-center flex-1">
       <!-- Barra de búsqueda -->
-      <input type="text" placeholder="Buscar actividad..." class="p-2 search-bar">
+      <input type="text" placeholder="Buscar actividad..." class="p-2 search-bar" (click)="redirectToListActivities()">
     </div>
   
     <div class="flex items-center space-x-4">
-      <!-- Iconos de mensajes y perfil -->
-      <button class="p-2">
-        <img src="assets/mail.png" alt="Messages" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
-      </button>
-      <button class="p-2">
-        <img src="assets/login.png" alt="Profile" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
-      </button>
+      <!-- Icono de agregar, visible solo para usuarios host -->
+      <a *ngIf="accountType === 0" routerLink="/createActivities" aria-label="Crear nueva actividad">
+        <button class="p-2">
+          <img src="assets/agregar.png" alt="Agregar actividad" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
+        </button>
+      </a>
+    
+  
+      <!-- Icono de perfil -->
+      <a routerLink="/createActivities">
+        <button class="p-2">
+          <img src="assets/login.png" alt="Profile" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
+        </button>
+      </a>
     </div>
   </nav>
+  
+  
+  
   

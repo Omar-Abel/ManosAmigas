@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 interface Activity {
@@ -125,14 +126,16 @@ export class ActivityListComponent {
 
   isModalOpen = false;
   selectedActivity: Activity | null = null;
+  showAlert = false;
   intervalId: any;
+  accountType: number = 1; 
+  currentUserId: number = 0;
 
-  constructor() {
-    // Configurar el intervalo para actualizar el tiempo restante
+  constructor(private router: Router) { 
     this.intervalId = setInterval(() => {
       this.updateRemainingTime();
-    }, 60000); // Actualizar cada minuto
-    this.updateRemainingTime(); // Llamar inicialmente para establecer el valor
+    }, 60000);
+    this.updateRemainingTime();
   }
 
   ngOnDestroy() {
@@ -154,6 +157,8 @@ export class ActivityListComponent {
   enrollInActivity(activity: Activity) {
     console.log(`Inscribirse en la actividad: ${activity.title}`);
     // Aquí puedes agregar la lógica para inscribirse en la actividad
+    this.showAlert = true;
+    setTimeout(() => this.showAlert = false, 5000);
   }
 
   deleteActivity(activity: Activity) {
@@ -178,8 +183,14 @@ export class ActivityListComponent {
   }
 
   private createDate(year: number, month: number, day: number): Date {
-    // Ajustar el mes para que enero sea 1, febrero sea 2, etc.
     return new Date(year, month - 1, day);
   }
-}
 
+  isHost(): boolean {
+    return this.accountType === 0;
+  }
+
+  redirectToListActivities() {
+    this.router.navigate(['/listActivities']);
+  }
+}

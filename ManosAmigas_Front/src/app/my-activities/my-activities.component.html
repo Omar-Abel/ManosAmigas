@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+
+<header class="bg-red-500 p-4 text-center text-white">
+  <h1 class="text-3xl font-bold">Manos Amigas</h1>
+</header>
+
+<main class="max-w-6xl mx-auto mt-5 p-4 flex gap-4">
+  <!-- Sección de filtros -->
+  <aside class="w-60 bg-white p-4 rounded-lg shadow">
+    <h2 class="text-xl font-bold mb-4">Filtrar por:</h2>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="category">Categoría</label>
+      <select id="category" class="form-select mt-1 block w-full border-gray-300 rounded-md">
+        <option>Todos</option>
+        <option>Doméstico</option>
+        <option>Agricultura</option>
+        <option>Educativo</option>
+        <option>Medioambiental</option>
+        <option>Bienestar Animal</option>
+        <option>Salud</option>
+        <option>Comunidad</option>
+        <option>Culinaria</option>
+      </select>
+    </div>
+  </aside>
+
+  <!-- Lista de mis actividades -->
+  <div class="flex-1">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">Mis Actividades</h1>
+    <ul class="space-y-4">
+      <li *ngFor="let activity of activities" class="bg-white rounded-lg shadow-md p-4 flex items-center">
+        <img [src]="activity.image" alt="Actividad" class="rounded-full mr-4 w-24 h-24 object-cover">
+        <div class="flex-1">
+          <h3 class="text-xl font-semibold text-red-500">{{ activity.title }}</h3>
+          <p class="text-gray-600">{{ activity.detailedDescription }}</p>
+          <p class="text-gray-500">{{ activity.location }}</p>
+          <p class="text-gray-500">{{ activity.startdate | date:'dd/MM/yyyy' }}</p>
+          <p class="text-gray-500">{{ activity.enddate | date:'dd/MM/yyyy' }}</p>
+        </div>
+        <button class="ml-auto bg-red-500 text-white px-4 py-2 rounded" (click)="showDetails(activity)">Detalles</button>
+      </li>
+    </ul>
+  </div>
+</main>
+
+<!-- Modal para detalles -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-5xl h-auto overflow-auto">
+    <button class="text-gray-600 hover:text-black float-right text-2xl" (click)="closeModal()">&times;</button>
+    <h2 class="text-2xl font-bold mb-4">{{ selectedActivity?.title }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <img [src]="selectedActivity?.image" alt="Actividad" class="w-full h-96 object-cover rounded mb-4 md:mb-0">
+      <div class="pl-4">
+        <p class="text-gray-700 mb-4">{{ selectedActivity?.detailedDescription }}</p>
+        <ul class="list-disc pl-5 mb-4">
+          <li><strong>Beneficio:</strong> {{ selectedActivity?.beneficioActividad }}</li>
+          <li><strong>Ubicación:</strong> {{ selectedActivity?.location }}</li>
+          <li><strong>Punto de encuentro:</strong> {{ selectedActivity?.meetingPoint }}</li>
+          <li><strong>Fecha de Inicio:</strong> {{ selectedActivity?.startdate | date:'dd/MM/yyyy' }}</li>
+          <li><strong>Fecha de Finalizacion:</strong> {{ selectedActivity?.enddate | date:'dd/MM/yyyy' }}</li>
+          <li><strong>Duración restante:</strong> {{ selectedActivity?.remainingTime }}</li>
+          <li><strong>Personas necesarias:</strong> {{ selectedActivity?.peopleNeeded }}</li>
+        </ul>
+    
+        <div class="flex space-x-4">
+          <button *ngIf="selectedActivity" class="bg-red-500 text-white px-4 py-2 rounded" (click)="deleteActivity(selectedActivity)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<footer class="bg-gray-800 text-white text-center p-4 mt-10">
+  <p>&copy; 2024 Manos Amigas. Todos los derechos reservados.</p>
+</footer>
