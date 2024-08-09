@@ -84,7 +84,7 @@
         </div>
 
         <div class="flex space-x-4">
-          <button *ngIf="selectedActivity" class="bg-green-500 text-white px-4 py-2 rounded" (click)="enrollInActivity(selectedActivity!)">Inscribirse</button>
+          <button *ngIf="selectedActivity" class="bg-green-500 text-white px-4 py-2 rounded" (click)="enrollInActivity()">Inscribirse</button>
           <button *ngIf="selectedActivity && accountType === 0" class="bg-red-500 text-white px-4 py-2 rounded" (click)="deleteActivity(selectedActivity!)">Eliminar</button>
         </div>
       </div>

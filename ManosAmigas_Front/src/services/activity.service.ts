@@ -23,4 +23,9 @@ export class ActivityService {
   getActivities(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+  sendEmail(email: string): Observable<any> {
+    const url = `https://localhost:7000/api/Email/send/${email}`;
+    return this.http.get(url); 
+  }
+
 }

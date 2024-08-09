@@ -1,3 +1,4 @@
+using ManosAmigas_Back.Controllers;
 using ManosAmigas_Back.Models.Common;
 using ManosAmigas_Back.Services.Activities;
 using ManosAmigas_Back.Services.Users;
@@ -57,6 +58,7 @@ namespace ManosAmigas_Back
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IActivityService, ActivityService>();
+           
 
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ManosAmigas_Back.Models.Response;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -14,6 +15,8 @@ namespace ManosAmigas_Back.Controllers
         [HttpGet("send/{email}")]
         public async Task<IActionResult> SendEmail(string email)
         {
+            Response response = new Response();
+
             try
             {
                 var smtpClient = new SmtpClient("smtp.gmail.com")
@@ -26,7 +29,7 @@ namespace ManosAmigas_Back.Controllers
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress("elvis.antonio.nunez.30@gmail.com"),
-                    Subject = "Inscripción a la actividad",
+                    Subject = "MANOS AMIGAS: Inscripción a la actividad",
                     Body = "Te has inscrito a la actividad exitosamente.",
                     IsBodyHtml = false,
                 };
@@ -34,7 +37,10 @@ namespace ManosAmigas_Back.Controllers
 
                 await smtpClient.SendMailAsync(mailMessage);
 
-                return Ok("Correo enviado exitosamente a " + email);
+                response.success = 1;
+                response.message = "Correo enviado correctamente";
+                response.Data = email;
+                return Ok(response);
             }
             catch (System.Exception ex)
             {
