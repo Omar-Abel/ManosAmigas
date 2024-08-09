@@ -26,9 +26,31 @@
       <button class="p-2">
         <img src="assets/mail.png" alt="Messages" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
       </button>
-      <button class="p-2">
-        <img src="assets/login.png" alt="Profile" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10">
-      </button>
+      
+      <button data-popover-target="popover-user-profile" type="button" class="p-2"><img src="assets/login.png" alt="Profile" class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10"></button>
+
+        <div data-popover id="popover-user-profile" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+            <div class="p-3">
+
+                <p class="mb-4 text-lg font-semibold leading-none text-gray-900 dark:text-white">
+                    Jese Leos
+                </p>
+
+                <p class="mb-5 text-base font-semibold leading-none text-gray-900 dark:text-white">
+                  {{ accountType === 1 ? 'Voluntariado' : 'Host' }}
+                </p>
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                      <a *ngIf="accountType === 0"><button type="button" class=" text-sm text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mis Actividades</button></a>
+                  </div>
+                  <div>
+                    <button type="button" class=" text-sm text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-3 py-1.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Log Out</button>
+                </div>
+              </div>
+            </div>
+            <div data-popper-arrow></div>
+        </div>
+
     </div>
   </nav>
   
