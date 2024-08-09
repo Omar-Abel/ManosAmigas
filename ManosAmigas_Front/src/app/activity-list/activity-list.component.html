@@ -5,7 +5,7 @@
 </header>
 
 <main class="max-w-6xl mx-auto mt-5 p-4 flex gap-4">
-  <!-- Sección de filtros -->
+
   <aside class="w-60 bg-white p-4 rounded-lg shadow">
     <h2 class="text-xl font-bold mb-4">Filtrar por:</h2>
     <div class="mb-4">
@@ -24,23 +24,30 @@
     </div>
   </aside>
 
-  <!-- Lista de actividades -->
   <div class="flex-1">
     <h1 class="text-3xl font-bold text-gray-800 mb-4">Actividades</h1>
     <ul class="space-y-4">
       <li *ngFor="let activity of activities" class="bg-white rounded-lg shadow-md p-4 flex items-center">
-        <img [src]="activity.image" alt="Actividad" class="rounded-full mr-4 w-24 h-24 object-cover">
+        <!-- Mostrar la imagen de la actividad -->
+        <img [src]="'https://localhost:7000/api/Activity/Images?imagePath=' + activity.imagePath" alt="Actividad" class="rounded-full mr-4 w-24 h-24 object-cover">
         <div class="flex-1">
+          <!-- Título de la actividad -->
           <h3 class="text-xl font-semibold text-red-500">{{ activity.title }}</h3>
-          <p class="text-gray-600">{{ activity.detailedDescription }}</p>
+          <!-- Descripción de la actividad con texto truncado -->
+          <p class="text-gray-600 description-truncate">{{ activity.description }}</p>
+          <!-- Ubicación de la actividad -->
           <p class="text-gray-500">{{ activity.location }}</p>
-          <p class="text-gray-500">{{ activity.startdate | date:'dd/MM/yyyy' }}</p>
-          <p class="text-gray-500">{{ activity.enddate | date:'dd/MM/yyyy' }}</p>
+          <!-- Fecha de inicio de la actividad -->
+          <p class="text-gray-500">{{ activity.startDate | date:'dd/MM/yyyy' }}</p>
+          <!-- Fecha de fin de la actividad -->
+          <p class="text-gray-500">{{ activity.endDate | date:'dd/MM/yyyy' }}</p>
         </div>
+        <!-- Botón para mostrar detalles -->
         <button class="ml-auto bg-red-500 text-white px-4 py-2 rounded" (click)="showDetails(activity)">Detalles</button>
       </li>
     </ul>
   </div>
+  
 </main>
 
 <!-- Modal para detalles -->
@@ -49,45 +56,26 @@
     <button class="text-gray-600 hover:text-black float-right text-2xl" (click)="closeModal()">&times;</button>
     <h2 class="text-2xl font-bold mb-4">{{ selectedActivity?.title }}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <img [src]="selectedActivity?.image" alt="Actividad" class="w-full h-96 object-cover rounded mb-4 md:mb-0">
+      <img *ngIf="selectedActivity?.imagePath" [src]="'https://localhost:7000/api/Activity/Images?imagePath=' + selectedActivity!.imagePath" alt="Actividad" class="w-full h-96 object-cover rounded mb-4 md:mb-0">
       <div class="pl-4">
-        <p class="text-gray-700 mb-4">{{ selectedActivity?.detailedDescription }}</p>
+        <p class="text-gray-700 mb-4">{{ selectedActivity?.description }}</p>
         <ul class="list-disc pl-5 mb-4">
-          <li><strong>Beneficio:</strong> {{ selectedActivity?.beneficioActividad }}</li>
+          <li><strong>Beneficio:</strong> {{ selectedActivity?.benefits }}</li>
           <li><strong>Ubicación:</strong> {{ selectedActivity?.location }}</li>
           <li><strong>Punto de encuentro:</strong> {{ selectedActivity?.meetingPoint }}</li>
-          <li><strong>Fecha de Inicio:</strong> {{ selectedActivity?.startdate | date:'dd/MM/yyyy' }}</li>
-          <li><strong>Fecha de Finalizacion:</strong> {{ selectedActivity?.enddate | date:'dd/MM/yyyy' }}</li>
-          <li><strong>Duración restante:</strong> {{ selectedActivity?.remainingTime }}</li>
-          <li><strong>Personas necesarias:</strong> {{ selectedActivity?.peopleNeeded }}</li>
+          <li><strong>Fecha de Inicio:</strong> {{ selectedActivity?.startDate | date:'dd/MM/yyyy' }}</li>
+          <li><strong>Fecha de Finalización:</strong> {{ selectedActivity?.endDate | date:'dd/MM/yyyy' }}</li>
+          <li><strong>Personas necesarias:</strong> {{ selectedActivity?.peopleRequired }}</li>
         </ul>
-    
         <div class="flex space-x-4">
-          <button *ngIf="selectedActivity" class="bg-green-500 text-white px-4 py-2 rounded" (click)="enrollInActivity(selectedActivity)">Inscribirse</button>
-          <button *ngIf="selectedActivity" class="bg-red-500 text-white px-4 py-2 rounded" (click)="deleteActivity(selectedActivity)">Eliminar</button>
+          <button *ngIf="selectedActivity" class="bg-green-500 text-white px-4 py-2 rounded" (click)="enrollInActivity(selectedActivity!)">Inscribirse</button>
+          <button *ngIf="selectedActivity" class="bg-red-500 text-white px-4 py-2 rounded" (click)="deleteActivity(selectedActivity!)">Eliminar</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-
 <footer class="bg-gray-800 text-white text-center p-4 mt-10">
   <p>&copy; 2024 Manos Amigas. Todos los derechos reservados.</p>
 </footer>
-
-
-
-
-
-
-
-
-
-
-
-  
-  

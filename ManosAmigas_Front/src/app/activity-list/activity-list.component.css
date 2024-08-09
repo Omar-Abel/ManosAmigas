@@ -1,2 +1,10 @@
-
+.description-truncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Ajusta el número de líneas visibles */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em; /* Ajusta el interlineado si es necesario */
+  }
+  
   
